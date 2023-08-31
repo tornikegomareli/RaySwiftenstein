@@ -1,0 +1,36 @@
+// The Swift Programming Language
+// https://docs.swift.org/swift-book
+
+import Raylib
+
+struct Main {
+  let screenWidth: Int32 = 800
+  let screenHeight: Int32 = 450
+
+  private var player = Player(position: Vector(x: 150, y: 20))
+
+  
+  init() {
+    Raylib.initWindow(screenWidth, screenHeight, "MyGame")
+    Raylib.setTargetFPS(100)
+  }
+
+  mutating func startGame() {
+    player.update()
+    let renderer = Renderer(width: 10, height: 10)
+
+    while Raylib.windowShouldClose == false {
+      renderer.draw(player)
+    }
+
+    Raylib.closeWindow()
+  }
+}
+
+
+var instance = Main()
+instance.startGame()
+
+
+
+
