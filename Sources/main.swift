@@ -16,13 +16,15 @@ struct Main {
 
     while Raylib.windowShouldClose == false {
       world.update()
+      if Raylib.isKeyDown(.letterW) {
+        print("WWWWWWWWWWWWWWWWWWWWW")
+      }
       renderer.draw(world)
     }
 
     Raylib.closeWindow()
   }
 }
-
 
 var instance = Main()
 instance.startGame()
