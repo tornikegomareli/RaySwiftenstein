@@ -1,11 +1,13 @@
 public struct Tilemap: Decodable {
   private let tiles: [Tile]
-  private let width: Int
+  public let width: Int
+}
 
+public extension Tilemap {
   var height: Int {
     return tiles.count / width
   }
-  
+
   var size: Vector {
     return Vector(x: Double(width), y: Double(height))
   }
@@ -14,4 +16,3 @@ public struct Tilemap: Decodable {
     return tiles[y * width + x]
   }
 }
-

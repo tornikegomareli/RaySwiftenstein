@@ -2,17 +2,18 @@
 // https://docs.swift.org/swift-book
 
 import Raylib
+import Foundation
 
 struct Main {
-  var world = World()
+  var world = World(map: loadMap())
 
   init() {
-    Raylib.initWindow(Int32(world.size.x), Int32(world.size.y), "MyGame")
+    Raylib.initWindow(Int32(windowWidth), Int32(windowHeight), "MyGame")
     Raylib.setTargetFPS(60)
   }
 
   mutating func startGame() {
-    var renderer = Renderer(width: 10, height: 10)
+    var renderer = Renderer(width: 10, height: 10, scale: world.scaleOfWorld)
 
     while Raylib.windowShouldClose == false {
       world.update()
