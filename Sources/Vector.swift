@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Tornike on 31/08/2023.
 //
@@ -21,6 +21,11 @@ public extension Vector {
   func toRaylibVector() -> Vector2 {
     return Vector2.init(x: Float(self.x), y: Float(self.y))
   }
+  
+  var length: Double {
+    return (x * x + y * y).squareRoot()
+  }
+
   static func + (lhs: Vector, rhs: Vector) -> Vector {
     return Vector(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
   }

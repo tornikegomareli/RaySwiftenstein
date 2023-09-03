@@ -22,9 +22,13 @@ public struct World {
 }
 
 public extension World {
-  mutating func update() {
-    // Player velocity is 0,0 from start, so divide to 60 always gives us Vector with [0.0, 0.0]
-    player.position = player.position + (player.velocity / 60)
+  // Little bit bad naming, we are only updating player positions here
+  // name update makes little bit miss understanding, someone will think that whole world positions are updated in that method
+  // we will see what we will need in future and decide how to deal with that
+  // For no let it be how it is.
+  mutating func update(input: Input) {
+    player.velocity = input.velocity * player.speed * scaleOfWorld
+    player.position = player.position + player.velocity
 
     // Don't let player frame update to be bigger then scale of world
     // And truncate it.

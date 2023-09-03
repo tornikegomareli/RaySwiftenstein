@@ -3,6 +3,7 @@ import Raylib
 public struct Player {
   public var position: Vector
   public var velocity: Vector
+  public var speed: Double = 100
   public let radius: Double = 0.5
 
 
