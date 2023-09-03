@@ -1,33 +1,42 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
-
 import Raylib
 import Foundation
 
 struct Main {
-  var world = World(map: loadMap())
+  var world: World
+  var renderer: Renderer
 
   init() {
     Raylib.initWindow(Int32(windowWidth), Int32(windowHeight), "MyGame")
     Raylib.setTargetFPS(60)
+
+    world = World(map: loadMap())
+    renderer = Renderer(width: 10, height: 10, scale: world.scaleOfWorld)
   }
 
   mutating func startGame() {
-    var renderer = Renderer(width: 10, height: 10, scale: world.scaleOfWorld)
-
-    while Raylib.windowShouldClose == false {
-      world.update()
-      if Raylib.isKeyDown(.letterW) {
-        print("WWWWWWWWWWWWWWWWWWWWW")
-      }
+    while !Raylib.windowShouldClose {
+      let input = handleInput()
+      world.update(input: input)
       renderer.draw(world)
     }
 
     Raylib.closeWindow()
   }
+
+  private mutating func handleInput() -> Input {
+    var velocity = Vector(x: 0.0, y: 0.0)
+    let frameTime = Double(Raylib.getFrameTime())
+
+    if Raylib.isKeyDown(.letterW) { velocity.y -= frameTime }
+    if Raylib.isKeyDown(.letterS) { velocity.y += frameTime }
+    if Raylib.isKeyDown(.letterA) { velocity.x -= frameTime }
+    if Raylib.isKeyDown(.letterD) { velocity.x += frameTime }
+
+    velocity /= max(wasdMovementRadius, velocity.length)
+    return Input(velocity: velocity)
+  }
 }
 
-var instance = Main()
-instance.startGame()
-
-
+// Entry point
+var main = Main()
+main.startGame()
