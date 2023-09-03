@@ -8,7 +8,7 @@ public struct Player {
 
   public init(position: Vector) {
     self.position = position
-    self.velocity = Vector(x: 100, y: 100)
+    self.velocity = Vector(x: 0, y: 0)
   }
 
   var rect: Rect {

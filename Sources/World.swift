@@ -1,17 +1,29 @@
 import Raylib
 
 public struct World {
-  public var player: Player
+  public var player: Player!
   public var map: Tilemap
 
   public init(map: Tilemap) {
     self.map = map
-    self.player = Player(position: map.size / 2)
+    for y in 0 ..< map.height {
+      for x in 0 ..< map.width {
+        let position = Vector(x: Double(x) + 0.5, y: Double(y) + 0.5)
+        let thing = map.things[y * map.width + x]
+        switch thing {
+        case .nothing:
+          break
+        case .player:
+          self.player = Player(position: position)
+        }
+      }
+    }
   }
 }
 
 public extension World {
   mutating func update() {
+    // Player velocity is 0,0 from start, so divide to 60 always gives us Vector with [0.0, 0.0]
     player.position = player.position + (player.velocity / 60)
 
     // Don't let player frame update to be bigger then scale of world
@@ -29,7 +41,7 @@ public extension World {
     let gridHeight = Double(map.height)
 
     let desiredCoverageRatio = 1.0  // 100% coverage
-    
+
     let scaleX = (windowWidth * desiredCoverageRatio) / gridWidth
     let scaleY = (windowHeight * desiredCoverageRatio) / gridHeight
 
