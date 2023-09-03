@@ -8,7 +8,7 @@ struct Main {
   var world = World(map: loadMap())
 
   init() {
-    Raylib.initWindow(Int32(windowWidth), Int32(windowHeight), "MyGame")
+    Raylib.initWindow(Int32(windowWidth), Int32(windowHeight), "RaySwiftenstein")
     Raylib.setTargetFPS(60)
   }
 
