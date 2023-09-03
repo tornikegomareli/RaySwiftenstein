@@ -14,7 +14,7 @@ public struct Renderer {
 public extension Renderer {
   mutating func draw(_ world: World) {
     Raylib.beginDrawing()
-    Raylib.clearBackground(.rayWhite)
+    Raylib.clearBackground(.black)
 
     // Draw map
     drawMap(world: world, scale: scale)
@@ -63,7 +63,7 @@ public extension Renderer {
           max: Vector(x: Double(x + 1), y: Double(y + 1)) * scale
         )
 
-        Raylib.drawRectangleRec(rect.toRaylibRectangle(), .black)
+        Raylib.drawRectangleRec(rect.toRaylibRectangle(), .white)
       }
     }
   }
