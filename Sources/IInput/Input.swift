@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  Input.swift
+//
 //
 //  Created by Tornike on 04/09/2023.
 //
