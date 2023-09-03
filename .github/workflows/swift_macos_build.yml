@@ -1,0 +1,24 @@
+name: Swift macOS build
+
+on:
+  pull_request:
+    branches:
+      - main  # Trigger the action when a pull request is made to the main branch
+
+jobs:
+  build:
+    runs-on: macOS-latest  # Use the latest macOS version
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        brew update
+        brew install raylib
+        # Add other macOS dependencies here
+
+    - name: Build
+      run: |
+        swift build
