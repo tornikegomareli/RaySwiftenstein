@@ -1,4 +1,6 @@
 # RaySwiftenstein
+![Screenshot 2023-09-03 at 04 23 43](https://github.com/tornikegomareli/RaySwiftenstein/assets/24585160/51ddd272-40d8-4fea-b970-bdcf579e9407)
+
 Raylib + Swift + Wolfenstein3D
 
 Project is very early development stage, inspiration is [Nick Lockwood's Retro Rampage](https://github.com/nicklockwood/RetroRampage) series.
