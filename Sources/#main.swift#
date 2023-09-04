@@ -1,0 +1,42 @@
+import Raylib
+import Foundation
+
+struct Main {
+  var world: World
+  var renderer: Renderer
+
+  init() {
+    Raylib.initWindow(Int32(windowWidth), Int32(windowHeight), "MyGame")
+    Raylib.setTargetFPS(60)
+
+    world = World(map: loadMap())
+    renderer = Renderer(width: 10, height: 10, scale: world.scaleOfWorld)
+  }
+
+  mutating func startGame() {
+    while !Raylib.windowShouldClose {
+      let input = handleInput()
+      world.update()
+      renderer.draw(world)
+    }
+
+    Raylib.closeWindow()
+  }
+
+  private mutating func handleInput() -> Input {
+    var velocity = Vector(x: 0.0, y: 0.0)
+    let frameTime = Double(Raylib.getFrameTime())
+
+    if Raylib.isKeyDown(.letterW) { velocity.y -= frameTime }
+    if Raylib.isKeyDown(.letterS) { velocity.y += frameTime }
+    if Raylib.isKeyDown(.letterA) { velocity.x -= frameTime }
+    if Raylib.isKeyDown(.letterD) { velocity.x += frameTime }
+
+    velocity /= max(wasdMovementRadius, velocity.length)
+    return Input(velocity: velocity)
+  }
+}
+
+// Entry point
+var main = Main()
+main.startGame()

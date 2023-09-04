@@ -6,7 +6,7 @@ public struct Renderer {
 
   public init(width: Int, height: Int, scale: Double) {
     // Scale player bitmap based on scale of world
-    self.playerBitmap = Bitmap(width: width + Int(scale), height: height + Int(scale), color: .blue)
+    self.playerBitmap = Bitmap(width: width + 50, height: height + 50, color: .blue)
     self.scale = scale
   }
 }
@@ -14,20 +14,18 @@ public struct Renderer {
 public extension Renderer {
   mutating func draw(_ world: World) {
     Raylib.beginDrawing()
-    Raylib.clearBackground(.black)
+    Raylib.clearBackground(.red)
 
     // Draw map
     drawMap(world: world, scale: scale)
-    //drawPlayer(player: world.player, scale: scale)
 
     // Draw Player
     var rect = world.player.rect
     rect.min *= scale
     rect.max *= scale
     playerBitmap.fill(rect: rect, color: .blue)
+
     drawPlayerBitmap(playerBitmap, x: Int(world.player.position.x), y: Int(world.player.position.y))
-
-
 
     Raylib.drawFPS(10, 10)
     Raylib.endDrawing()
@@ -63,7 +61,7 @@ public extension Renderer {
           max: Vector(x: Double(x + 1), y: Double(y + 1)) * scale
         )
 
-        Raylib.drawRectangleRec(rect.toRaylibRectangle(), .white)
+        Raylib.drawRectangleRec(rect.toRaylibRectangle(), .green)
       }
     }
   }

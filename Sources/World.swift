@@ -8,7 +8,7 @@ public struct World {
     self.map = map
     for y in 0 ..< map.height {
       for x in 0 ..< map.width {
-        let position = Vector(x: Double(x) + 0.5, y: Double(y) + 0.5)
+        let position = Vector(x: Double(x) * scaleOfWorld, y: Double(y) * scaleOfWorld)
         let thing = map.things[y * map.width + x]
         switch thing {
         case .nothing:
@@ -30,10 +30,19 @@ public extension World {
     player.velocity = input.velocity * player.speed * scaleOfWorld
     player.position = player.position + player.velocity
 
-    // Don't let player frame update to be bigger then scale of world
-    // And truncate it.
-    player.position.x.formTruncatingRemainder(dividingBy: size.x * scaleOfWorld)
-    player.position.y.formTruncatingRemainder(dividingBy: size.y * scaleOfWorld)
+    for y in 0 ..< map.height {
+      for x in 0 ..< map.width where map[x, y].isWall {
+        let rect = Rect(
+          min: Vector(x: Double(x), y: Double(y)) * scaleOfWorld,
+          max: Vector(x: Double(x + 1), y: Double(y + 1)) * scaleOfWorld
+        )
+
+        if Raylib.checkCollisionRecs(rect.toRaylibRectangle(), player.rect.toRaylibRectangle()) {
+          print("Collision!")
+          player.position = player.position - player.velocity
+        }
+      }
+    }
   }
 
   var size: Vector {
