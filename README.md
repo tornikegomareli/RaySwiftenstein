@@ -1,6 +1,9 @@
 # RaySwiftenstein
 ![Screenshot 2023-09-03 at 04 23 43](https://github.com/tornikegomareli/RaySwiftenstein/assets/24585160/51ddd272-40d8-4fea-b970-bdcf579e9407)
 
+The screenshot is just current progress, currently we are rendering map based on Bitmap, map is changable from JSON file, also loading player based on JSON. 
+After implementation of raycasting, the perspective will change to "3D"
+
 Raylib + Swift + Wolfenstein3D
 
 Project is very early development stage, inspiration is [Nick Lockwood's Retro Rampage](https://github.com/nicklockwood/RetroRampage) series.
